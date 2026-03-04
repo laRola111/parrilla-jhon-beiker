@@ -238,6 +238,19 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-4 sm:px-8 py-10">
             {menuData.map((cat) => (
               <div key={cat.id} id={cat.id} className="scroll-mt-40">
+                {cat.id === "especialidades-bebidas" && (
+                  <div className="w-full text-center mt-24 mb-16 relative py-12 border-y border-amber-500/20 bg-gradient-to-r from-black/20 via-amber-900/10 to-black/20 overflow-hidden shadow-[0_0_40px_rgba(245,159,10,0.05)] rounded-3xl backdrop-blur-sm">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                    <span className="material-symbols-outlined text-4xl bg-gradient-to-r from-yellow-400 via-amber-500 to-amber-700 bg-clip-text text-transparent drop-shadow-md mb-2 animate-bounce">local_bar</span>
+                    <h2 className="text-6xl md:text-7xl font-stencil uppercase text-white drop-shadow-[0_0_20px_rgba(245,159,10,0.6)] tracking-widest relative z-10">
+                      {language === "es" ? "BEBIDAS" : "DRINKS"}
+                    </h2>
+                    <p className="text-amber-500 mt-4 text-lg md:text-xl font-light tracking-[0.2em] uppercase relative z-10">
+                      {language === "es" ? "Refrescantes y Tradicionales" : "Refreshing and Traditional"}
+                    </p>
+                  </div>
+                )}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
                   <h2 className="text-4xl font-heading uppercase text-white drop-shadow-md flex items-center gap-3 text-glow-hover transition-all">
                     {cat.title[language as "es" | "en"]}

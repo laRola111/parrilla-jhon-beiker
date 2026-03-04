@@ -52,7 +52,7 @@ export const menuData: MenuCategoryData[] = [
         id: "entradas",
         title: { es: "Entradas", en: "Appetizers" },
         icon: "tapas",
-        image: "/images/cruzada.png",
+        image: "/images/seviche-de-chicharron.png",
         items: [
             {
                 title: { es: "Coctel de Camarones", en: "Shrimp Cocktail" },
@@ -64,7 +64,7 @@ export const menuData: MenuCategoryData[] = [
                 price: "$10",
                 desc: { es: "Con hogao o guacamole y queso costeño", en: 'With "hogao" sauce or guacamole and costeño cheese' },
             },
-            { title: { es: "Ceviche de Chicharrón", en: "Pork Rind Ceviche" }, price: "$17" },
+            { title: { es: "Ceviche de Chicharrón", en: "Pork Rind Ceviche" }, price: "$17", image: "/images/seviche-de-chicharron.png" },
             {
                 title: { es: "Picada de Morcilla", en: "Blood Sausage Platter" },
                 price: "$13",
@@ -83,6 +83,7 @@ export const menuData: MenuCategoryData[] = [
         title: { es: "Menú Diario", en: "Daily Menu" },
         icon: "calendar_today",
         note: { es: "Incluye 2 acompañantes a elección", en: "Includes 2 sides of your choice" },
+        image: "/images/bistec-a-caballo.png",
         items: [
             { title: { es: "Pollo a la Plancha", en: "Grilled Chicken" }, price: "$16" },
             { title: { es: "Bisteck al Caballo", en: "Steak topped with Fried Egg" }, price: "$22", image: "/images/bistec-a-caballo.png" },
