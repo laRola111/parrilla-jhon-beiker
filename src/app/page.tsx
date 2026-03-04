@@ -216,7 +216,7 @@ export default function Home() {
         <main className="flex-1 pb-20">
           {/* Clean Wrap Navigation for Categories */}
           <div className="sticky top-20 z-40 bg-background-dark/95 backdrop-blur border-b border-primary/20 py-4 px-4 sm:px-8 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-            <div className="max-w-5xl mx-auto flex flex-wrap gap-3 justify-center">
+            <div className="max-w-5xl mx-auto flex overflow-x-auto sm:flex-wrap gap-3 sm:justify-center pb-2 px-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {menuData.map((cat) => (
                 <button
                   key={cat.id}
@@ -227,7 +227,7 @@ export default function Home() {
                       window.scrollTo({ top: y, behavior: 'smooth' });
                     }
                   }}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 bg-surface-highlight text-gray-300 hover:text-white hover:bg-surface-dark border border-white/5 hover:border-primary/50 group hover:shadow-[0_0_15px_rgba(255,184,0,0.2)]"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 bg-surface-highlight text-gray-300 hover:text-white hover:bg-surface-dark border border-white/5 hover:border-primary/50 group hover:shadow-[0_0_15px_rgba(255,184,0,0.2)] whitespace-nowrap snap-center shrink-0"
                 >
                   <span className="material-symbols-outlined text-xl text-primary/70 group-hover:text-primary transition-colors">{cat.icon}</span>
                   <span className="text-sm font-bold">{cat.title[language as "es" | "en"]}</span>
