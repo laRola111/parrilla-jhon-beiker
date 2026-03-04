@@ -1,87 +1,116 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @theme inline {
-  --color-primary: #b8860b;
-  --color-primary-dark: #8b6508;
-  --color-secondary: #ef4444;
-  --color-background-light: #f8f7f5;
-  --color-background-dark: #0a0a0a;
-  --color-surface-dark: #171717;
-  --color-surface-highlight: #232323;
+    --color-primary: #FFB800;
+    --color-primary-dark: #D48C00;
+    --color-secondary: #ff4500;
+    --color-background-light: #f8f7f5;
+    --color-background-dark: #121212;
+    --color-surface-dark: #1a1a1a;
+    --color-surface-highlight: #242424;
 
-  --font-display: var(--font-patua-one), serif;
-  --font-body: var(--font-work-sans), sans-serif;
-  --font-sans: var(--font-work-sans), sans-serif;
+    --font-display: var(--font-archivo-black), sans-serif;
+    --font-stencil: var(--font-black-ops-one), cursive;
+    --font-heading: var(--font-archivo-black), sans-serif;
+    --font-card-title: var(--font-nunito), sans-serif;
+    --font-body: var(--font-montserrat), sans-serif;
+    --font-sans: var(--font-montserrat), sans-serif;
 
-  --background-image-smoke-pattern: url("https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=2565&auto=format&fit=crop");
+    --background-image-smoke-pattern: url("https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=2565&auto=format&fit=crop");
 }
 
 :root {
-  --background: #f8f7f5;
-  --foreground: #0a0a0a;
+    --background: #f8f7f5;
+    --foreground: #121212;
 }
+
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+    --background: #121212;
+    --foreground: #ededed;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+    background: var(--background);
+    color: var(--foreground);
 }
 
-/* Custom Scrollbar for dark theme */
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #171717;
+    background: #1a1a1a;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 4px;
+    background: #444;
+    border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59f0a;
+    background: #FFB800;
 }
+
+@utility bg-grain-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    background-repeat: repeat;
+}
+
+@utility vignette-overlay {
+    background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.85) 130%);
+}
+
 @utility text-glow {
-  text-shadow:
-    0 0 20px rgba(245, 159, 10, 0.5),
-    0 0 40px rgba(239, 68, 68, 0.3);
+    text-shadow: 0 0 15px rgba(255, 184, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.4);
+}
+
+@utility text-glow-hover {
+    text-shadow: 0 0 25px rgba(255, 184, 0, 0.8), 0 0 45px rgba(255, 69, 0, 0.6);
 }
 
 @utility text-distressed {
-  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8));
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8));
 }
 
 @utility img-glow {
-  filter: drop-shadow(0 0 15px rgba(184, 134, 11, 0.4));
+    filter: drop-shadow(0 10px 25px rgba(255, 69, 0, 0.3));
+}
+
+@utility card-glow-hover {
+    box-shadow: 0 0 0 2px rgba(255, 184, 0, 0), 0 10px 30px -10px rgba(255, 69, 0, 0);
+    transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.card-glow-hover:hover {
+    box-shadow: 0 0 0 1px rgba(255, 184, 0, 0.5), 0 15px 35px -5px rgba(255, 69, 0, 0.2);
+    border-color: rgba(255, 184, 0, 0.4);
 }
 
 @utility bg-gold-gradient {
-  background: linear-gradient(145deg, #c59327 0%, #a27211 50%, #765107 100%);
+    background: linear-gradient(145deg, #FFD700 0%, #FFB800 50%, #D48C00 100%);
 }
 
 @utility text-gold-gradient {
-  background: linear-gradient(145deg, #dfa831 0%, #b8860b 50%, #8b6508 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+    background: linear-gradient(145deg, #FFD700 0%, #FFB800 50%, #D48C00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 @utility animate-marquee {
-  animation: marquee 30s linear infinite;
+    animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }

@@ -4,8 +4,11 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { menuData } from "@/data/menu";
 
 export default function Home() {
+  const { t, language, setLanguage } = useLanguage();
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -55,37 +58,53 @@ export default function Home() {
                 height={48}
                 className="object-contain"
               />
-              <h1 className="text-white text-xl font-display uppercase tracking-wider hidden sm:block">
+              <h1 className="text-white text-xl font-heading uppercase tracking-wider hidden sm:block">
                 Parrillas JhonBeiker
               </h1>
             </div>
-            <nav className="hidden md:flex gap-8">
+            <nav className="hidden md:flex gap-8 items-center">
               <a
                 className="text-gray-300 hover:text-amber-500 font-medium transition-colors"
                 href="#"
               >
-                Inicio
+                {t.nav.home}
               </a>
               <a
                 className="text-gray-300 hover:text-amber-500 font-medium transition-colors"
                 href="#reviews"
               >
-                Nuestra Historia
+                {t.nav.story}
               </a>
               <a
                 className="text-gray-300 hover:text-amber-500 font-medium transition-colors"
                 href="#footer"
               >
-                Contacto
+                {t.nav.contact}
               </a>
+              <div className="flex bg-white/10 rounded-full p-1 border border-white/20">
+                <button
+                  onClick={() => setLanguage("es")}
+                  className={`px-3 py-1 text-sm rounded-full transition-all ${language === "es" ? "bg-amber-600 text-white shadow-md font-bold" : "text-gray-300 hover:text-white"
+                    }`}
+                >
+                  ES
+                </button>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`px-3 py-1 text-sm rounded-full transition-all ${language === "en" ? "bg-amber-600 text-white shadow-md font-bold" : "text-gray-300 hover:text-white"
+                    }`}
+                >
+                  EN
+                </button>
+              </div>
             </nav>
             <a
               href="https://wa.me/15129677169?text=Hola,%20quiero%20reservar%20una%20mesa"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-amber-500 to-amber-700 hover:brightness-110 text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200 inline-block"
+              className="bg-gradient-to-r from-amber-500 to-amber-700 hover:brightness-110 text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200 hidden lg:inline-block"
             >
-              Reservar Mesa
+              {t.nav.reserve}
             </a>
           </div>
         </div>
@@ -108,7 +127,7 @@ export default function Home() {
             <span className="material-symbols-outlined text-sm">
               local_fire_department
             </span>
-            Auténtico Sabor
+            {t.hero.tag}
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             {!showSplash && (
@@ -127,15 +146,15 @@ export default function Home() {
                 />
               </motion.div>
             )}
-            <h1 className="text-6xl md:text-8xl font-display text-white leading-tight tracking-tight text-distressed text-glow text-center md:text-left">
+            <h1 className="text-6xl md:text-8xl font-stencil text-white leading-tight tracking-tight text-distressed text-glow text-center md:text-left">
               PARRILLAS
               <br />
               JHONBEIKER
             </h1>
           </div>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-2xl mx-auto mt-2">
-            El corazón de nuestra tierra{" "}
-            <span className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm font-semibold">en cada bocado</span>
+            {t.hero.subtitle}{" "}
+            <span className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm font-semibold">{t.hero.highlight}</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <a
@@ -143,69 +162,20 @@ export default function Home() {
               href="#menu"
             >
               <span className="material-symbols-outlined">restaurant_menu</span>
-              Ver Menú
+              {t.hero.menuBtn}
             </a>
             <a
               href="#reviews"
               className="flex items-center justify-center gap-2 bg-transparent border-2 border-white/20 hover:border-white text-white font-bold text-lg py-4 px-8 rounded-xl transition-all hover:bg-white/5"
             >
               <span className="material-symbols-outlined">star</span>
-              Reviews
+              {t.hero.reviewsBtn}
             </a>
           </div>
         </div>
       </section>
 
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-primary/5 to-transparent pointer-events-none"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-20">
-        <div className="text-center mb-16">
-          <h2 className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm font-bold tracking-widest uppercase mb-2">
-            Galería
-          </h2>
-          <h3 className="text-4xl font-display text-white mb-6 drop-shadow-lg">
-            Nuestros Platos
-          </h3>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            Una mirada a la auténtica gastronomía Colombo-Venezolana.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
-          {/* Replace these placeholder images with the actual files later */}
-          <div className="rounded-xl overflow-hidden md:col-span-2 md:row-span-2 relative group">
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-            <img
-              src="https://images.unsplash.com/photo-1544025162-8360d0938ff5?q=80&w=2669&auto=format&fit=crop"
-              alt="Bandeja Paisa"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden relative group">
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-            <img
-              src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=2670&auto=format&fit=crop"
-              alt="Chicharron"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden relative group">
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-            <img
-              src="https://images.unsplash.com/photo-1611599537845-1c7ce0005449?q=80&w=2574&auto=format&fit=crop"
-              alt="Arepas"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden md:col-span-2 relative group">
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
-            <img
-              src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2574&auto=format&fit=crop"
-              alt="Grill Meat"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-        </div>
-      </div>
       {/* Reviews Marquee Section */}
       <section
         id="reviews"
@@ -214,93 +184,24 @@ export default function Home() {
         <div className="flex whitespace-nowrap animate-marquee items-center gap-8">
           {[1, 2, 3].map((set) => (
             <div key={set} className="flex gap-8 items-center shrink-0">
-              {/* Review 1 */}
-              <div className="bg-background-dark/90 backdrop-blur-sm px-8 py-5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-4">
-                <div className="flex bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm drop-shadow-md">
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
+              {/* Map Reviews */}
+              {t.reviews.map((review: { text: string }, i: number) => (
+                <div key={i} className="flex gap-8 items-center shrink-0">
+                  <div className="bg-background-dark/90 backdrop-blur-sm px-8 py-5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-4">
+                    <div className="flex bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-md">
+                      <span className="material-symbols-outlined !text-xl">star</span>
+                      <span className="material-symbols-outlined !text-xl">star</span>
+                      <span className="material-symbols-outlined !text-xl">star</span>
+                      <span className="material-symbols-outlined !text-xl">star</span>
+                      <span className="material-symbols-outlined !text-xl">star</span>
+                    </div>
+                    <p className="text-white font-medium text-lg italic" dangerouslySetInnerHTML={{ __html: review.text }}></p>
+                  </div>
+                  <span className="material-symbols-outlined text-background-dark !text-3xl mx-4 opacity-50">
+                    local_fire_department
                   </span>
                 </div>
-                <p className="text-white font-medium text-lg italic">
-                  &quot;La mejor bandeja paisa de la ciudad.&quot; - Carlos M.
-                </p>
-              </div>
-
-              {/* Separator */}
-              <span className="material-symbols-outlined text-background-dark !text-3xl mx-4 opacity-50">
-                local_fire_department
-              </span>
-
-              {/* Review 2 */}
-              <div className="bg-background-dark/90 backdrop-blur-sm px-8 py-5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-4">
-                <div className="flex bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm drop-shadow-md">
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                </div>
-                <p className="text-white font-medium text-lg italic">
-                  &quot;Auténtico sabor venezolano, las arepas son increíbles.&quot; - Ana
-                  V.
-                </p>
-              </div>
-
-              {/* Separator */}
-              <span className="material-symbols-outlined text-background-dark !text-3xl mx-4 opacity-50">
-                local_fire_department
-              </span>
-
-              {/* Review 3 */}
-              <div className="bg-background-dark/90 backdrop-blur-sm px-8 py-5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-4">
-                <div className="flex bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm drop-shadow-md">
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                  <span className="material-symbols-outlined !text-xl">
-                    star
-                  </span>
-                </div>
-                <p className="text-white font-medium text-lg italic">
-                  &quot;Atención de primera y parrillas espectaculares.&quot; - Juan P.
-                </p>
-              </div>
-
-              {/* Separator */}
-              <span className="material-symbols-outlined text-background-dark !text-3xl mx-4 opacity-50">
-                local_fire_department
-              </span>
+              ))}
             </div>
           ))}
         </div>
@@ -313,682 +214,65 @@ export default function Home() {
       >
         {/* Menu Section (Left) */}
         <main className="flex-1 pb-20">
-          {/* Sticky Category Nav */}
-          <div className="sticky top-20 z-40 bg-background-dark/95 backdrop-blur border-b border-white/5 py-4 px-4 sm:px-8 shadow-2xl">
-            <div className="max-w-5xl mx-auto overflow-x-auto pb-2 scrollbar-hide">
-              <div className="flex gap-4 min-w-max">
-
-                <button 
-                  onClick={() => document.getElementById('desayunos')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-700 text-white font-bold shadow-lg shadow-amber-900/40 transition-all hover:scale-105"
+          {/* Clean Wrap Navigation for Categories */}
+          <div className="sticky top-20 z-40 bg-background-dark/95 backdrop-blur border-b border-primary/20 py-4 px-4 sm:px-8 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+            <div className="max-w-5xl mx-auto flex flex-wrap gap-3 justify-center">
+              {menuData.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    const el = document.getElementById(cat.id);
+                    if (el) {
+                      const y = el.getBoundingClientRect().top + window.scrollY - 150;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 bg-surface-highlight text-gray-300 hover:text-white hover:bg-surface-dark border border-white/5 hover:border-primary/50 group hover:shadow-[0_0_15px_rgba(255,184,0,0.2)]"
                 >
-                  <span className="material-symbols-outlined text-lg">sunny</span>
-                  Desayunos
+                  <span className="material-symbols-outlined text-xl text-primary/70 group-hover:text-primary transition-colors">{cat.icon}</span>
+                  <span className="text-sm font-bold">{cat.title[language as "es" | "en"]}</span>
                 </button>
-                <button 
-                  onClick={() => document.getElementById('entradas')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">tapas</span>
-                  Entradas
-                </button>
-                <button 
-                  onClick={() => document.getElementById('menu-diario')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">calendar_today</span>
-                  Menú Diario
-                </button>
-                <button 
-                  onClick={() => document.getElementById('especiales')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">stars</span>
-                  Platos Especiales
-                </button>
-                <button 
-                  onClick={() => document.getElementById('fines-semana')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">celebration</span>
-                  Especiales Fin de Semana
-                </button>
-                <button 
-                  onClick={() => document.getElementById('parrillas')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">local_fire_department</span>
-                  Parrillas
-                </button>
-                <button 
-                  onClick={() => document.getElementById('hamburguesas')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">lunch_dining</span>
-                  Hamburguesas
-                </button>
-                <button 
-                  onClick={() => document.getElementById('patacones')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">restaurant</span>
-                  Patacones
-                </button>
-                <button 
-                  onClick={() => document.getElementById('fast-food')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">fastfood</span>
-                  Comida Rápida (Fast Food)
-                </button>
-                <button 
-                  onClick={() => document.getElementById('salchipapas')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">french_fries</span>
-                  Salchipapas
-                </button>
-                <button 
-                  onClick={() => document.getElementById('perros-locos')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">hotdog</span>
-                  Perros Locos
-                </button>
-                <button 
-                  onClick={() => document.getElementById('desgranados')?.scrollIntoView({behavior: 'smooth'})}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface-highlight text-gray-300 hover:text-amber-500 border border-white/5 font-medium transition-all hover:scale-105"
-                >
-                  <span className="material-symbols-outlined text-lg">rice_bowl</span>
-                  Desgranados
-                </button>
-              </div>
+              ))}
             </div>
           </div>
           <div className="max-w-5xl mx-auto px-4 sm:px-8 py-10">
-            
-            <div id="desayunos" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Desayunos
-                </h2>
-                <span className="text-sm text-amber-500 max-w-sm text-right">Servidos hasta las 11:30 AM</span>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Calentado Paisa Sencillo"
-                  price="$15"
-                  
-                />
-                
-                <MenuItem
-                  title="Calentado Paisa Especial"
-                  price="$17"
-                  
-                />
-                
-                <MenuItem
-                  title="Arepa con Chicharrón"
-                  price="$12"
-                  
-                />
-                
-                <MenuItem
-                  title="Arepa con Hígado Encebollado"
-                  price="$14"
-                  
-                />
-                
-                <MenuItem
-                  title="Huevos Revueltos a tu gusto"
-                  price="$13"
-                  desc="Salchicha, Queso, Chorizo, Estrellados o Rancheros"
-                />
-                
-                <MenuItem
-                  title="Desayuno Criollo Venezolano"
-                  price="$17"
-                  desc="Frijoles negros, huevo, queso, nata y carne mechada"
-                />
-                
-                <MenuItem
-                  title="Arepas Rellenas"
-                  price="$10"
-                  desc="Jamón y Queso, Atún o Huevos Pericos"
-                />
-                
-                <MenuItem
-                  title="Arepas Especiales"
-                  price="$14"
-                  desc="Reina Pepiada, Carne Mechada o Pollo Esmechado"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
+            {menuData.map((cat) => (
+              <div key={cat.id} id={cat.id} className="scroll-mt-40">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
+                  <h2 className="text-4xl font-heading uppercase text-white drop-shadow-md flex items-center gap-3 text-glow-hover transition-all">
+                    {cat.title[language as "es" | "en"]}
+                  </h2>
+                  {cat.note && <span className="text-sm text-amber-500 max-w-sm text-right">{cat.note[language as "es" | "en"]}</span>}
+                </div>
 
-            <div id="entradas" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Entradas
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Coctel de Camarones"
-                  price="$12"
-                  desc="Servido con tajadas o galletas"
-                />
-                
-                <MenuItem
-                  title="Bold de Plátano"
-                  price="$10"
-                  desc="Con hogao o guacamole y queso costeño"
-                />
-                
-                <MenuItem
-                  title="Ceviche de Chicharrón"
-                  price="$17"
-                  
-                />
-                
-                <MenuItem
-                  title="Picada de Morcilla"
-                  price="$13"
-                  desc="Con tostones y guacamole"
-                />
-                
-                <MenuItem
-                  title="Tequeños (5 piezas)"
-                  price="$10"
-                  
-                />
-                
-                <MenuItem
-                  title="Tostones con Chicharrón"
-                  price="$14"
-                  desc="Con crema y queso frito"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
+                <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 pb-4">
+                  {cat.image && (
+                    <div className="w-full lg:w-1/3 shrink-0">
+                      <div className="top-40 sticky rounded-2xl overflow-hidden border border-white/10 shadow-lg group h-48 lg:h-auto">
+                        <img
+                          src={cat.image}
+                          alt={cat.title[language as "es" | "en"]}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 lg:aspect-[4/5]"
+                        />
+                      </div>
+                    </div>
+                  )}
 
-            <div id="menu-diario" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Menú Diario
-                </h2>
-                <span className="text-sm text-amber-500 max-w-sm text-right">Incluye 2 acompañantes a elección (Arroz, Tajadas, Tostones, Ensalada Cruda, Ensalada Cocida)</span>
+                  <div className={`flex flex-col w-full ${cat.image ? 'lg:w-2/3' : ''}`}>
+                    {cat.items.map((item, idx) => (
+                      <MenuItem
+                        key={idx}
+                        title={item.title[language as "es" | "en"]}
+                        price={item.price}
+                        desc={item.desc ? item.desc[language as "es" | "en"] : undefined}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="border-t border-white/5 my-8"></div>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Pollo a la Plancha"
-                  price="$16"
-                  
-                />
-                
-                <MenuItem
-                  title="Bistec al Caballo"
-                  price="$22"
-                  
-                />
-                
-                <MenuItem
-                  title="Costilla en Coco"
-                  price="$15"
-                  
-                />
-                
-                <MenuItem
-                  title="Mojarra Frita"
-                  price="$24"
-                  
-                />
-                
-                <MenuItem
-                  title="Chuleta Ahumada"
-                  price="$16"
-                  
-                />
-                
-                <MenuItem
-                  title="Bistec Encebollado"
-                  price="$18"
-                  
-                />
-                
-                <MenuItem
-                  title="Costilla San Luis"
-                  price="$18"
-                  
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="especiales" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Platos Especiales
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Bandeja Paisa"
-                  price="$25"
-                  desc="Arroz, frijoles, chicharrón, aguacate, huevo, carne molida, chorizo y morcilla"
-                />
-                
-                <MenuItem
-                  title="Pabellón Criollo"
-                  price="$18"
-                  desc="Arroz, maduro, huevo, aguacate, frijoles y carne mechada"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="fines-semana" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Especiales Fin de Semana
-                </h2>
-                <span className="text-sm text-amber-500 max-w-sm text-right">Viernes, Sábado y Domingo</span>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Mondongo"
-                  price="$18"
-                  
-                />
-                
-                <MenuItem
-                  title="Sopa de Costilla"
-                  price="$18"
-                  
-                />
-                
-                <MenuItem
-                  title="Sancocho de Gallina"
-                  price="$19"
-                  
-                />
-                
-                <MenuItem
-                  title="Arroz Paisa"
-                  price="$26"
-                  
-                />
-                
-                <MenuItem
-                  title="Arroz Especial"
-                  price="$25"
-                  
-                />
-                
-                <MenuItem
-                  title="Arroz de Pollo"
-                  price="$23"
-                  
-                />
-                
-                <MenuItem
-                  title="Ajiaco"
-                  price="$16"
-                  
-                />
-                
-                <MenuItem
-                  title="Mote de Queso"
-                  price="$18"
-                  
-                />
-                
-                <MenuItem
-                  title="Cordon Bleu de Pollo"
-                  price="$17"
-                  
-                />
-                
-                <MenuItem
-                  title="Pasticho"
-                  price="$17"
-                  
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="parrillas" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Parrillas
-                </h2>
-                <span className="text-sm text-amber-500 max-w-sm text-right">Incluyen 2 acompañantes (Ensalada, Papa criolla/francesa, Arepitas, Yuca, Tostones)</span>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Lomito"
-                  price="$24"
-                  
-                />
-                
-                <MenuItem
-                  title="Puerco"
-                  price="$18"
-                  
-                />
-                
-                <MenuItem
-                  title="Cruzada"
-                  price="$23"
-                  desc="2 proteínas: lomito, pollo o puerco"
-                />
-                
-                <MenuItem
-                  title="Mixta (2 personas)"
-                  price="$33"
-                  desc="3 proteínas: lomito, pollo, puerco o chorizo"
-                />
-                
-                <MenuItem
-                  title="ParriJhonBeiker"
-                  price="$45"
-                  desc="Trae las 4 proteínas"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="hamburguesas" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Hamburguesas
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Sencilla"
-                  price="$13"
-                  desc="Carne de la casa, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Especial"
-                  price="$15"
-                  desc="Pollo o lomito, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Mix Burger"
-                  price="$21"
-                  desc="2 proteínas a su preferencia, jamón, queso, huevo, lechuga"
-                />
-                
-                <MenuItem
-                  title="Chorreada Sencilla"
-                  price="$17"
-                  desc="1 proteína a su preferencia, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Chorreada Especial"
-                  price="$23"
-                  desc="2 proteínas a su preferencia, jamón, queso, huevo, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="La JhonBeiker"
-                  price="$29"
-                  desc="2 proteínas a su preferencia, jamón, queso, huevo, lechuga y tomate"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="patacones" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Patacones
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Patacón Sencillo"
-                  price="$18"
-                  desc="Verde o maduro, proteína, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Mix Patacón"
-                  price="$21"
-                  desc="2 proteínas, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="JhonBeik Patacón"
-                  price="$28"
-                  desc="3 proteínas, jamón, queso, huevo, lechuga y tomate"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="fast-food" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Comida Rápida (Fast Food)
-                </h2>
-                <span className="text-sm text-amber-500 max-w-sm text-right">Arepas, Cabimeras y Cachapas</span>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Arepa"
-                  price="$18"
-                  desc="1 proteína a su elección, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Arepón"
-                  price="$20"
-                  desc="2 proteínas a su elección, jamón, queso, lechuga y tomate"
-                />
-                
-                <MenuItem
-                  title="Cabimera Sencilla"
-                  price="$18"
-                  desc="Arepa o plátano, proteína, jamón, queso, repollo, tomate, mayonesa y kétchup"
-                />
-                
-                <MenuItem
-                  title="Mix Cabimera"
-                  price="$22"
-                  desc="2 proteínas a su elección, jamón, queso, huevo, maíz, repollo y tomate"
-                />
-                
-                <MenuItem
-                  title="CabiJhonBeiker"
-                  price="$29"
-                  desc="3 proteínas a su elección, jamón, queso, huevo, maíz, repollo y tomate"
-                />
-                
-                <MenuItem
-                  title="Cachapa con Queso"
-                  price="$13"
-                  
-                />
-                
-                <MenuItem
-                  title="Cachapa con Proteína"
-                  price="$17"
-                  
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="salchipapas" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Salchipapas
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Mini Salchi"
-                  price="$8"
-                  desc="Papa, queso, salchichas, huevos de codorniz y salsas"
-                />
-                
-                <MenuItem
-                  title="SalchiSensei"
-                  price="$13"
-                  desc="Papas, queso, salchichas, huevos de codorniz, salsas y panceta"
-                />
-                
-                <MenuItem
-                  title="Choripapa Sencilla"
-                  price="$10"
-                  desc="Papas, queso, chorizo, lechuga, huevo de codorniz"
-                />
-                
-                <MenuItem
-                  title="Choripapa Especial"
-                  price="$15"
-                  desc="Papa, queso, chorizo, lechuga, huevo de codorniz y carne asada"
-                />
-                
-                <MenuItem
-                  title="La Poderosa"
-                  price="$25"
-                  desc="Papas, salchichas, chicharrón, huevo de codorniz, queso, panceta"
-                />
-                
-                <MenuItem
-                  title="Tumba Hogares"
-                  price="$30"
-                  desc="Papas, salchichas, chicharrón, huevo de codorniz, queso, chorizo y maíz - Pollo o Lomito"
-                />
-                
-                <MenuItem
-                  title="SalchiParriJhon"
-                  price="$55"
-                  desc="Papas, salchichas, chicharrón, huevo de codorniz, queso, chorizo, maíz, pollo o lomito y lomo de cerdo"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="perros-locos" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Perros Locos
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Pan Huevo"
-                  price="$8"
-                  desc="Pan, huevo, ripio, queso, ensalada de repollo"
-                />
-                
-                <MenuItem
-                  title="Sencillos"
-                  price="$10"
-                  desc="Pan, salchicha, ripio, queso, ensalada de repollo"
-                />
-                
-                <MenuItem
-                  title="Especial"
-                  price="$15"
-                  desc="1 proteína, ripio, queso, ensalada de repollo"
-                />
-                
-                <MenuItem
-                  title="Mega Mix"
-                  price="$18"
-                  desc="2 proteínas, ripio, queso, ensalada de repollo, tocineta"
-                />
-                
-                <MenuItem
-                  title="PaJhonBeiker"
-                  price="$26"
-                  desc="3 proteínas, ripio, queso, ensalada de repollo, tocineta, huevo"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-
-            <div id="desgranados" className="scroll-mt-40">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 mt-12 gap-2">
-                <h2 className="text-4xl font-display text-white drop-shadow-md flex items-center gap-3">
-                  Desgranados
-                </h2>
-                
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
-                
-                <MenuItem
-                  title="Sencillo"
-                  price="$8"
-                  desc="Maíz, quesos, salsas y huevos de codorniz"
-                />
-                
-                <MenuItem
-                  title="Especial"
-                  price="$12"
-                  desc="Maíz, quesos, salsas, huevos de codorniz y pollo o lomito"
-                />
-                
-                <MenuItem
-                  title="Súper Especial"
-                  price="$18"
-                  desc="Maíz, quesos, salsas, huevos de codorniz, pollo y lomito"
-                />
-                
-              </div>
-              <div className="border-t border-white/5 my-8"></div>
-            </div>
-</div>
+            ))}
+          </div>
         </main>
 
         {/* Sticky Cart Sidebar (Desktop) */}
@@ -998,13 +282,13 @@ export default function Home() {
               <span className="material-symbols-outlined bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">
                 shopping_bag
               </span>
-              <h2 className="text-xl font-display">Tu Pedido</h2>
+              <h2 className="text-xl font-heading">{language === "es" ? "Tu Pedido" : "Your Order"}</h2>
             </div>
             <p className="text-sm text-gray-500">Mesa 12 • Dine-in</p>
           </div>
           <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
             <p className="text-gray-500 text-sm text-center italic mt-10">
-              El carrito está vacío
+              {language === "es" ? "El carrito está vacío" : "Cart is empty"}
             </p>
           </div>
           <div className="p-6 bg-surface-highlight border-t border-white/5 mt-auto">
@@ -1013,7 +297,7 @@ export default function Home() {
               <span>$0.00</span>
             </div>
             <div className="flex justify-between mb-4 text-sm text-gray-400">
-              <span>Impuestos (10%)</span>
+              <span>{language === "es" ? "Impuestos (10%)" : "Tax (10%)"}</span>
               <span>$0.00</span>
             </div>
             <div className="flex justify-between mb-6 text-xl font-black text-white">
@@ -1021,10 +305,61 @@ export default function Home() {
               <span className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">$0.00</span>
             </div>
             <button className="w-full py-4 rounded-xl bg-surface-highlight border border-white/10 text-gray-500 font-bold text-lg cursor-not-allowed">
-              Confirmar Pedido
+              {language === "es" ? "Confirmar Pedido" : "Checkout"}
             </button>
           </div>
         </aside>
+      </div>
+
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-primary/5 to-transparent pointer-events-none"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full mb-20 mt-16" id="galeria">
+        <div className="text-center mb-16">
+          <h2 className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm font-bold tracking-widest uppercase mb-2">
+            {t.gallery.tag}
+          </h2>
+          <h3 className="text-4xl font-display text-white mb-6 drop-shadow-lg">
+            {t.gallery.title}
+          </h3>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            {t.gallery.desc}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+          {/* Replace these placeholder images with the actual files later */}
+          <div className="rounded-xl overflow-hidden md:col-span-2 md:row-span-2 relative group">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+            <img
+              src="/images/bandeja-paisa.png"
+              alt="Bandeja Paisa"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden relative group">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+            <img
+              src="/images/calentado-paisa.png"
+              alt="Desayuno Paisa"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden relative group">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+            <img
+              src="/images/arepa-rellena.png"
+              alt="Arepas Rellenas"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <div className="rounded-xl overflow-hidden md:col-span-2 relative group">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+            <img
+              src="/images/parrilla-mixta.png"
+              alt="Parrilla Mixta Grill"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 bg-black/50"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Footer */}
@@ -1034,12 +369,13 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h2 className="text-2xl font-display uppercase mb-4 tracking-wider">
+            <h2 className="text-2xl font-stencil text-distressed uppercase mb-4 tracking-wider">
               Parrillas JhonBeiker
             </h2>
             <p className="text-gray-400 max-w-sm mb-6">
-              Fusión gastronómica que une corazones. El verdadero sabor del
-              grill colombo-venezolano en tu mesa.
+              {language === "es"
+                ? "Fusión gastronómica que une corazones. El verdadero sabor del grill colombo-venezolano en tu mesa."
+                : "A gastronomic fusion that unites hearts. The true flavor of Colombian-Venezuelan grill on your table."}
             </p>
             <div className="flex gap-4">
               <a
@@ -1061,7 +397,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">Horarios</h3>
+            <h3 className="font-bold text-lg mb-4 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">{language === "es" ? "Horarios" : "Hours"}</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li className="flex justify-between">
                 <span>Lun - Jue:</span> <span>11:00 AM - 9:00 PM</span>
@@ -1075,7 +411,7 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">Contacto</h3>
+            <h3 className="font-bold text-lg mb-4 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">{language === "es" ? "Contacto" : "Contact"}</h3>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li className="flex items-start gap-2">
                 <span className="material-symbols-outlined bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm text-sm mt-0.5">
@@ -1099,7 +435,7 @@ export default function Home() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-white/5 text-center text-gray-600 text-sm">
-          © 2026 Parrillas JhonBeiker. Todos los derechos reservados.
+          {language === "es" ? "© 2026 Parrillas JhonBeiker. Todos los derechos reservados." : "© 2026 Parrillas JhonBeiker. All rights reserved."}
         </div>
       </footer>
 
@@ -1133,21 +469,24 @@ function MenuItem({
   price: string;
   desc?: string;
 }) {
+  const { language } = useLanguage();
   return (
-    <div className="bg-surface-dark rounded-xl p-5 border border-white/5 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group flex flex-col justify-between">
-      <div>
-        <div className="flex justify-between items-start mb-2 border-b border-white/10 pb-2 border-dashed">
-          <h3 className="text-xl font-bold text-white group-hover:text-amber-500 transition-colors flex-1 pr-4">
+    <div className="flex flex-col py-4 border-b border-white/5 hover:bg-white/[0.02] transition-colors px-2 -mx-2 rounded-lg group">
+      <div className="flex justify-between items-start gap-4">
+        <div className="flex-1">
+          <h3 className="text-lg font-card-title font-bold text-white group-hover:text-primary transition-colors">
             {title}
           </h3>
-          <span className="text-xl font-display bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-sm">{price}</span>
+          {desc && <p className="text-gray-400 text-sm font-body mt-1 leading-relaxed pr-4">{desc}</p>}
         </div>
-        {desc && <p className="text-gray-400 text-sm mb-4">{desc}</p>}
+        <div className="flex flex-col items-end shrink-0 gap-2">
+          <span className="text-xl font-heading text-gold-gradient drop-shadow-sm">{price}</span>
+          <button className="text-xs font-bold text-gray-400 hover:text-primary transition-colors flex items-center gap-1 uppercase tracking-wider bg-white/5 px-3 py-1.5 rounded-md border border-white/10 group-hover:border-primary/30">
+            <span className="material-symbols-outlined text-[14px]">add</span>
+            {language === "es" ? "Agregar" : "Add"}
+          </button>
+        </div>
       </div>
-      <button className="w-full mt-2 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium transition-colors flex items-center justify-center gap-2 border border-white/5">
-        <span className="material-symbols-outlined text-sm">add_circle</span>
-        Agregar
-      </button>
     </div>
   );
 }
